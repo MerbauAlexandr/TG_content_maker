@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+openai
+requests
+telethon
+schedule
+Pillow
+pyrogram
+Flask
+Flask-SQLAlchemy

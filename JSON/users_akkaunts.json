@@ -1,0 +1,148 @@
+{
+  "database_id": 2,
+  "database_name": "users_akkaunts",
+  "database_description": "База данных хранит информацию о пользователях приложения, включая данные для входа, каналы, назначенные роли и предпочтения по частоте публикаций.",
+  "database_usage": "Используется для управления аккаунтами пользователей, их каналами и ролями. Ассистенты могут обращаться к этой базе для получения данных о пользователе, чтобы настроить персонализированный контент или провести взаимодействие с каналами.",
+  "variables": [
+    {
+      "name": "user_id",
+      "type": "int",
+      "description": "Уникальный идентификатор пользователя",
+      "constraints": "primary key"
+    },
+    {
+      "name": "username",
+      "type": "varchar",
+      "description": "Имя пользователя или никнейм"
+    },
+    {
+      "name": "phone_number",
+      "type": "varchar",
+      "description": "Номер телефона пользователя (используется для входа)"
+    },
+    {
+      "name": "email",
+      "type": "varchar",
+      "description": "Электронная почта пользователя (если требуется)",
+      "constraints": "optional"
+    },
+    {
+      "name": "telegram_id",
+      "type": "varchar",
+      "description": "Идентификатор Telegram для связи с ботом"
+    },
+    {
+      "name": "channels",
+      "type": "json",
+      "description": "Список каналов, привязанных к пользователю",
+      "structure": [
+        {
+          "name": "channel_id",
+          "type": "int",
+          "description": "Идентификатор канала"
+        },
+        {
+          "name": "channel_name",
+          "type": "varchar",
+          "description": "Название канала"
+        },
+        {
+          "name": "user_role",
+          "type": "varchar",
+          "description": "Назначенная пользователем роль для этого канала"
+        }
+      ]
+    },
+    {
+      "name": "preferences",
+      "type": "json",
+      "description": "Предпочтения пользователя",
+      "structure": [
+        {
+          "name": "posts_per_week",
+          "type": "int",
+          "description": "Количество публикаций в неделю"
+        },
+        {
+          "name": "preferred_content_format",
+          "type": "varchar",
+          "description": "Предпочитаемый формат контента (например, 'текст', 'видео')"
+        },
+        {
+          "name": "notification_settings",
+          "type": "json",
+          "description": "Настройки уведомлений для постов и контент-плана",
+          "structure": [
+            {
+              "name": "enabled",
+              "type": "boolean",
+              "description": "Включены ли уведомления (True/False)"
+            },
+            {
+              "name": "time_of_day",
+              "type": "time",
+              "description": "Время дня, когда пользователь хочет получать уведомления (например, '08:00')"
+            },
+            {
+              "name": "frequency",
+              "type": "varchar",
+              "description": "Частота уведомлений (например, 'ежедневно', 'еженедельно', 'по расписанию публикаций')"
+            },
+            {
+              "name": "channels_to_notify",
+              "type": "json",
+              "description": "Список каналов, для которых включены уведомления",
+              "structure": [
+                {
+                  "name": "channel_id",
+                  "type": "int",
+                  "description": "Идентификатор канала"
+                },
+                {
+                  "name": "notify_about_posts",
+                  "type": "boolean",
+                  "description": "Уведомлять о новых постах (True/False)"
+                },
+                {
+                  "name": "notify_about_stories",
+                  "type": "boolean",
+                  "description": "Уведомлять о новых сторис (True/False)"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "app_settings",
+      "type": "json",
+      "description": "Настройки приложения для пользователя, включая тему, отображение уведомлений и другие опции.",
+      "structure": [
+        {
+          "name": "theme",
+          "type": "varchar",
+          "description": "Тема интерфейса приложения (например, 'тёмная' или 'светлая')",
+          "example": "dark"
+        },
+        {
+          "name": "notifications_enabled",
+          "type": "boolean",
+          "description": "Включены ли уведомления о важных событиях и обновлениях (True/False)"
+        },
+        {
+          "name": "language",
+          "type": "varchar",
+          "description": "Предпочитаемый язык интерфейса",
+          "example": "ru"
+        },
+        {
+          "name": "timezone",
+          "type": "varchar",
+          "description": "Часовой пояс пользователя для корректного отображения времени",
+          "example": "Europe/Moscow"
+        }
+      ]
+    }
+  ]
+}

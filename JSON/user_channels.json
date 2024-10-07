@@ -1,0 +1,84 @@
+{
+  "database_id": 5,
+  "database_name": "user_channels",
+  "database_description": "Эта база данных будет хранить информацию о каналах, к которым подключён пользователь, а также процентное содержание ролей, которые связаны с этим каналом.",
+  "database_usage": "Используется для управления каналами и настройки процентного распределения ролей, чтобы создать уникальные стратегии для каждого канала.",
+  "variables": [
+    {
+      "name": "channel_id",
+      "type": "int",
+      "description": "Уникальный идентификатор канала.",
+      "constraints": "primary key"
+    },
+    {
+      "name": "channel_name",
+      "type": "varchar",
+      "description": "Название канала (например, 'Мой ТГ-канал')."
+    },
+    {
+      "name": "user_id",
+      "type": "int",
+      "description": "Идентификатор пользователя, которому принадлежит канал.",
+      "constraints": "foreign key (связан с таблицей users_akkaunts)"
+    },
+    {
+      "name": "roles_distribution",
+      "type": "json",
+      "description": "Процентное распределение ролей в канале.",
+      "structure": [
+        {
+          "name": "role_id",
+          "type": "int",
+          "description": "Идентификатор роли (связан с таблицей user_roles)."
+        },
+        {
+          "name": "role_name",
+          "type": "varchar",
+          "description": "Название роли (например, 'ментор')."
+        },
+        {
+          "name": "percentage",
+          "type": "int",
+          "description": "Процентное содержание этой роли в данном канале."
+        }
+      ],
+      "example": {
+        "roles_distribution": [
+          {
+            "role_id": 1,
+            "role_name": "ментор",
+            "percentage": 50
+          },
+          {
+            "role_id": 2,
+            "role_name": "семьянин",
+            "percentage": 30
+          },
+          {
+            "role_id": 3,
+            "role_name": "фаундер",
+            "percentage": 20
+          }
+        ]
+      }
+    },
+    {
+      "name": "channel_description",
+      "type": "text",
+      "description": "Описание канала (например, 'Канал о трансформации личности').",
+      "constraints": "optional"
+    },
+    {
+      "name": "channel_category",
+      "type": "varchar",
+      "description": "Категория канала (например, 'Саморазвитие', 'Бизнес').",
+      "constraints": "optional"
+    },
+    {
+      "name": "posting_frequency",
+      "type": "varchar",
+      "description": "Частота публикаций для данного канала.",
+      "example": "три раза в неделю"
+    }
+  ]
+}
