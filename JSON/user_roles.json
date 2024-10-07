@@ -10,7 +10,6 @@
       "description": "Уникальный идентификатор роли, который связывает её с пользователем.",
       "example": "101",
       "constraints": "primary key"
-      // Связано с базой данных user_channels по внешнему ключу, который указывает на role_id в канале
     },
     {
       "name": "user_id",
@@ -18,7 +17,6 @@
       "description": "Идентификатор пользователя, которому принадлежит данная роль.",
       "example": "1001",
       "constraints": "foreign key, references users_akkaunts(user_id)"
-      // Связано с базой данных users_akkaunts, которая хранит информацию о пользователях
     },
     {
       "name": "role_name",
